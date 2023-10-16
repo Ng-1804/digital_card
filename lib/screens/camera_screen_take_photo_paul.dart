@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import '../services/constantes.dart';
+import 'etat_civil_photo_screen_photo.dart';
 class CameraScreenTakePhoto extends StatefulWidget {
   bool cameraRectoOrVerso;
 
@@ -74,9 +75,8 @@ class _CameraScreenTakePhotoState extends State<CameraScreenTakePhoto> {
                             versoImagePath = image.path;
                           }
                           print("===================\n\n${image.path}\n\n======================");
-                          Navigator.pop(context);
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const EtatCivilPhotoScreenPaul()));
                         });
-
 
                       },
                       style: ElevatedButton.styleFrom(

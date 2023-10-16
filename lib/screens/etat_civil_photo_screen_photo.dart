@@ -26,7 +26,7 @@ class _EtatCivilPhotoScreenPaulState extends State<EtatCivilPhotoScreenPaul> {
             Center(
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>CameraScreenTakePhoto(cameraRectoOrVerso: true,)));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CameraScreenTakePhoto(cameraRectoOrVerso: true,)));
                   },
                   child: const Text("Prende le Recto")),
             ),
@@ -34,13 +34,13 @@ class _EtatCivilPhotoScreenPaulState extends State<EtatCivilPhotoScreenPaul> {
               height: MediaQuery.of(context).size.height*0.20,
               width: MediaQuery.of(context).size.width*0.9,
               color: Colors.grey,
-              child: rectoImagePath.isNotEmpty?DisplayPictureScreen(imagePath: rectoImagePath):const Center(child: Text("Photo Recto here"),),
+              child: rectoImagePath.isNotEmpty?Transform.rotate(angle: 50 * (3.14159265359 / 180), child: DisplayPictureScreen(imagePath: rectoImagePath),):const Center(child: Text("Photo Recto here"),),
             ),
             const Padding(padding: EdgeInsets.all(10)),
             Center(
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> CameraScreenTakePhoto(cameraRectoOrVerso: false)));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CameraScreenTakePhoto(cameraRectoOrVerso: false,)));
                   },
                   child: const Text("Prende le Verso")),
             ),
@@ -48,7 +48,8 @@ class _EtatCivilPhotoScreenPaulState extends State<EtatCivilPhotoScreenPaul> {
               height: MediaQuery.of(context).size.height*0.20,
               width: MediaQuery.of(context).size.width*0.9,
               color: Colors.grey,
-              child: versoImagePath.isNotEmpty?DisplayPictureScreen(imagePath: rectoImagePath):const Center(child: Text("Photo Verso here"),),
+              alignment: Alignment.center,
+              child: versoImagePath.isNotEmpty?Transform.rotate(angle: 90, child: DisplayPictureScreen(imagePath: versoImagePath),):const Center(child: Text("Photo Verso here"),),
             ),
             const Padding(padding: EdgeInsets.all(20)),
             Center(
@@ -71,6 +72,7 @@ class DisplayPictureScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.file(File(imagePath));
+    //return Image.asset(imagePath);
+    return  Image.file(File(imagePath), );
   }
 }
